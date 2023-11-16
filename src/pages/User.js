@@ -47,7 +47,7 @@ export default function User() {
         {/* Contenu principal du tableau de bord */}
         <Content>
           <section>
-            {/* Graphiques à barres représentant l'activité quotidienne de l'utilisateur */}
+            {/* Graphiques à barres représentant l'activité quotidienne de l'utilisateurs */}
             <BarCharts />
 
             {/* Section inférieure du tableau de bord contenant plusieurs graphiques */}

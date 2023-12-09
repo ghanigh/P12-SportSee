@@ -1,18 +1,35 @@
-class SessionsService {
-    constructor() {
-      this.axios = require("axios");
-    }
-  
-    getSessions(userId) {
-      const url = `https://localhost:3000/users/123456/sessions`;
-  
-      const response = await this.axios.get(url);
-  
-      if (response.status === 200) {
-        return response.data;
-      } else {
-        throw new Error(response.statusText);
-      }
-    }
+const sessions = await getSessions(123456);
+
+getSessions(123456).then(sessions => {
+  // Faire quelque chose avec les données des sessions
+});
+
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.sessions = null;
   }
-  
+
+  componentDidMount() {
+    getSessions(123456).then(sessions => {
+      this.sessions = sessions;
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        {this.sessions ? (
+          <div>
+            {this.sessions.map(session => (
+              <p key={session.id}>{session.date}</p>
+            ))}
+          </div>
+        ) : (
+          <div>Chargement...</div>
+        )}
+      </div>
+    );
+  }
+}

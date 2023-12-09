@@ -4,7 +4,7 @@ class SessionsService {
     }
   
     getSessions(userId) {
-      const url = `https://api.sportsee.com/users/${userId}/sessions`;
+      const url = `https://localhost:3000/users/123456/sessions`;
   
       const response = await this.axios.get(url);
   

@@ -1,10 +1,11 @@
 import axios from "axios";
 
 // Création d'une instance Axios avec une URL de base
+if(process.env.CONNECT_API==true){
 const api = axios.create({
   baseURL: `http://localhost:3000/`
 });
-
+}
 /**
  * Récupère l'activité de l'utilisateur.
  * @param {string} id - Identifiant de l'utilisateur.

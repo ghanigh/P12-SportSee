@@ -1,11 +1,18 @@
 import axios from "axios";
 
 // Création d'une instance Axios avec une URL de base
-if(process.env.CONNECT_API==true){
-const api = axios.create({
-  baseURL: `http://localhost:3000/`
-});
+const baseURL:
+if(process.env.CONNECT_API==true)
+{
+url=process.env.API_URL
 }
+else{
+  url=process.env.URL_DATA_MOCKED
+}
+ api = axios.create({
+  baseURL: url
+});
+
 /**
  * Récupère l'activité de l'utilisateur.
  * @param {string} id - Identifiant de l'utilisateur.

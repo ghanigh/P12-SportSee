@@ -1,10 +1,10 @@
 import axios from "axios";
 
 // Création d'une instance Axios avec une URL de base
-const baseURL:
+const url = "";
 if(process.env.CONNECT_API==true)
 {
-url=process.env.API_URL
+url=process.env.URL_API
 }
 else{
   url=process.env.URL_DATA_MOCKED

@@ -1,15 +1,14 @@
 import axios from "axios";
 
 // Création d'une instance Axios avec une URL de base
-const url = "";
-if(process.env.CONNECT_API==true)
-{
-url=process.env.URL_API
+let url = "";
+if (process.env.CONNECT_API == true) {
+  url = process.env.URL_API;
+} else {
+  url = process.env.URL_DATA_MOCKED;
 }
-else{
-  url=process.env.URL_DATA_MOCKED
-}
- api = axios.create({
+
+const api = axios.create({
   baseURL: url
 });
 
@@ -25,7 +24,7 @@ export const getUserActivity = async (id) => {
     return res.data;
   } catch (e) {
     // Gestion des erreurs
-    console.log(e);
+    console.error(e);
   }
 };
 
@@ -41,7 +40,7 @@ export const getUserInfos = async (id) => {
     return res.data;
   } catch (e) {
     // Gestion des erreurs
-    console.log(e);
+    console.error(e);
   }
 };
 
@@ -57,7 +56,7 @@ export const getUserPerformance = async (id) => {
     return res.data;
   } catch (e) {
     // Gestion des erreurs
-    console.log(e);
+    console.error(e);
   }
 };
 
@@ -73,6 +72,6 @@ export const getUserAverageSessions = async (id) => {
     return res.data;
   } catch (e) {
     // Gestion des erreurs
-    console.log(e);
+    console.error(e);
   }
 };

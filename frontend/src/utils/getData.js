@@ -1,5 +1,5 @@
-import apiCall from "./ApiCall";
-import dataMocked from "./dataMocked";
+import { getUserActivity, getUserAverageSessions, getUserInfos, getUserPerformance } from "./ApiCall";
+import { getUserActivityMockedData, getUserAverageSessionsMockedData, getUserInfosMockedData, getUserPerformanceMockedData } from "./dataMocked";
 
 /**
  * Récupère les données en fonction du type et de l'identifiant.
@@ -9,16 +9,28 @@ import dataMocked from "./dataMocked";
  */
 export const getData = async (type, id) => {
   try {
-     
-        const activity = await apiCall.getUserActivity(id);
+
+     if(type == true) { 
+        const activity = await getUserActivity(id);
       
-        const perform = apiCall.getUserPerformance(id);
+        const perform = await getUserPerformance(id);
      
-        const sessions = apiCall.getUserAverageSessions(id);
+        const sessions = await getUserAverageSessions(id);
     
-        const user =  apiCall.getUserInfos(id);
+        const user =  await getUserInfos(id);
       
-        return { user, activity, sessions, perform,};
+        return { user, activity, sessions, perform};
+      }
+      else{
+      const activity = await getUserActivityMockedData(id);
+      
+      const perform = await getUserPerformanceMockedData(id);
+   
+      const sessions = await getUserAverageSessionsMockedData(id);
+  
+      const user = await getUserInfosMockedData(id);
+    
+      return { user, activity, sessions, perform}}
     }
    catch (error) {
     console.error(`Erreur lors de la récupération des données de type ${type} pour l'utilisateur ${id}:`, error);

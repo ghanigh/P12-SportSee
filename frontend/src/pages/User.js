@@ -24,7 +24,7 @@ export default function User() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const request = await getData("USER_MAIN_DATA", id, process.env.CONNECT_API);
+      const request = await getData(process.env.CONNECT_API, id);
       if (!request) return alert("Erreur de données");
       setData(request.data);
     };

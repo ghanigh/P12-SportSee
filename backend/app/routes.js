@@ -14,14 +14,12 @@ const {
     handleNoUserData
 } = require('./middleware')
 
-
 router.get('/user/:id', (req, res) => {
     const userId = idx(req, _ => _.params.id)
     const userData = getUserById(Number(userId))
 
     return handleNoUserData(res, userData)
 })
-
 
 router.get('/user/:id/activity', (req, res) => {
     const userId = idx(req, _ => _.params.id)
@@ -30,7 +28,6 @@ router.get('/user/:id/activity', (req, res) => {
     return handleNoUserData(res, userData)
 })
 
-
 router.get('/user/:id/average-sessions', (req, res) => {
     const userId = idx(req, _ => _.params.id)
     const userData = getUserAverageSession(Number(userId))
@@ -38,13 +35,11 @@ router.get('/user/:id/average-sessions', (req, res) => {
     return handleNoUserData(res, userData)
 })
 
-
 router.get('/user/:id/performance', (req, res) => {
     const userId = idx(req, _ => _.params.id)
     const userData = getUserPerformance(Number(userId))
 
     return handleNoUserData(res, userData)
 })
-
 
 module.exports = router

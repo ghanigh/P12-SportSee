@@ -1,19 +1,29 @@
 import React from "react";
-import { Container, Title, Text, Score } from "../styles/scoreChartStyle";
-import { ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
 import PropTypes from "prop-types";
+import {
+  Container,
+  Title,
+  Text,
+  Score,
+} from "../styles/scoreChartStyle";
+import {
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
+} from "recharts";
 
 /**
  * Composant ScoreChart
  * Affiche un PieChart avec la valeur du score.
- * @param  {object} {data} - Les données du score.
+ * @param {object} { data } - Les données du score.
  * @return {JSX}
  */
 export default function ScoreChart({ data }) {
   // Formatage des données pour le PieChart
-  const score = [
+  const scoreData = [
     { value: data.todayScore || data.score },
-    { value: 1 - data.todayScore || data.score },
+    { value: 1 - (data.todayScore || data.score) },
   ];
 
   return (
@@ -26,24 +36,20 @@ export default function ScoreChart({ data }) {
         <PieChart>
           {/* Configuration du PieChart */}
           <Pie
-            data={score}
+            data={scoreData}
             dataKey="value"
             innerRadius={70}
             outerRadius={85}
             startAngle={90}
           >
             {/* Cellules du PieChart avec des couleurs différentes */}
-            {score.map((entry, index) =>
-              index === 0 ? (
-                <Cell
-                  key={`cell-${index}`}
-                  cornerRadius={10}
-                  fill="#ff0000"
-                />
-              ) : (
-                <Cell key={`cell-${entry}`} fill="#FBFBFB" />
-              )
-            )}
+            {scoreData.map((entry, index) => (
+              <Cell
+                key={`cell-${index}`}
+                cornerRadius={index === 0 ? 10 : 0}
+                fill={index === 0 ? "#ff0000" : "#FBFBFB"}
+              />
+            ))}
           </Pie>
         </PieChart>
       </ResponsiveContainer>
@@ -51,10 +57,9 @@ export default function ScoreChart({ data }) {
       {/* Texte des informations */}
       <Text>
         {/* Affichage du score */}
-        <Score>{score[0].value * 100}%<br /></Score>
-        de votre
+        <Score>{scoreData[0].value * 100}%</Score>
         <br />
-        objectif
+        de votre objectif
       </Text>
     </Container>
   );

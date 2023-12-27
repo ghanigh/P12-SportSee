@@ -14,7 +14,7 @@ export default function Home() {
 
       {/* Liens de navigation vers les pages d'utilisateurs avec des emojis représentant chaque utilisateur */}
       <NavLink to="user/12">👦 Ghani </NavLink>
-      <NavLink to="user/18">👩 Djoulie </NavLink>
+      <NavLink to="user/18">👩 Ju </NavLink>
     </Main>
   );
 }

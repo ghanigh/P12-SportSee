@@ -1,5 +1,5 @@
-import { getUserActivity,getUserAverageSessions, getUserInfos, getUserPerformance, } from "./ApiCall";
-// import { getUserActivity, getUserAverageSessions, getUserInfos, getUserPerformance } from "./dataMocked";
+import apiCall from "./ApiCall";
+import dataMocked from "./dataMocked";
 
 /**
  * Récupère les données en fonction du type et de l'identifiant.
@@ -8,21 +8,20 @@ import { getUserActivity,getUserAverageSessions, getUserInfos, getUserPerformanc
  * @returns {Array} - Tableau contenant les données récupérées.
  */
 export const getData = async (type, id) => {
-  let data = [];
-
-  switch (type) {
-    case "USER_ACTIVITY":
-      data = await getUserActivity(id);
-      break;
-    case "USER_PERFORMANCE":
-      data = await getUserPerformance(id);
-      break;
-    case "USER_AVERAGE_SESSIONS":
-      data = await getUserAverageSessions(id);
-      break;
-    case "USER_MAIN_DATA":
-      data = await getUserInfos(id);
-      break;
+  try {
+     
+        const activity = await apiCall.getUserActivity(id);
+      
+        const perform = apiCall.getUserPerformance(id);
+     
+        const sessions = apiCall.getUserAverageSessions(id);
+    
+        const user =  apiCall.getUserInfos(id);
+      
+        return { user, activity, sessions, perform,};
+    }
+   catch (error) {
+    console.error(`Erreur lors de la récupération des données de type ${type} pour l'utilisateur ${id}:`, error);
+    return null; // Vous pouvez retourner une valeur par défaut ou null en cas d'erreur
   }
-  return data;
 };

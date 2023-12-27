@@ -5,11 +5,16 @@ import { useParams } from "react-router";
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip } from "recharts";
 import SessionsToolType from "./SessionsToolType.js";
 
-/**
- * Composant UserAverageSessions
- * Affiche un graphique en ligne avec la durée moyenne des sessions de l'utilisateur.
- * @return {JSX}
- */
+const dayOfWeekMap = {
+  1: "L",
+  2: "M",
+  3: "M",
+  4: "J",
+  5: "V",
+  6: "S",
+  7: "D",
+};
+
 export default function UserAverageSessions() {
   const [data, setData] = useState([]);
   const { id } = useParams();
@@ -19,32 +24,32 @@ export default function UserAverageSessions() {
       const request = await getData("USER_AVERAGE_SESSIONS", id);
       if (!request) return alert("Erreur de récupération des données");
       
-      const formatData = request.data.sessions.map((data) => {
-        // Formatage du jour de la semaine
-        switch (data.day) {
-          case 1:
-            return { ...data, day: "L" };
-          case 2:
-          case 3:
-            return { ...data, day: "M" };
-          case 4:
-            return { ...data, day: "J" };
-          case 5:
-            return { ...data, day: "V" };
-          case 6:
-            return { ...data, day: "S" };
-          case 7:
-            return { ...data, day: "D" };
-          default:
-            return { ...data };
-        }
-      });
+      const formatData = request.data.sessions.map((data) => ({
+        ...data,
+        day: dayOfWeekMap[data.day] || data.day,
+      }));
+
       setData(formatData);
     };
+
     fetchData();
   }, [id]);
 
   if (data.length === 0) return null;
+
+  const handleMouseMove = (e) => {
+    if (e.isTooltipActive === true) {
+      // Gestion du fond de couleur lors du survol
+      const div = document.querySelector('.bUPtxZ');
+      if (div) {
+        const windowWidth = div.clientWidth;
+        const mouseXpercentage = Math.round(
+          (e.activeCoordinate.x / windowWidth) * 100
+        );
+        div.style.background = `linear-gradient(90deg, rgba(255,0,0,1) ${mouseXpercentage}%, rgba(175,0,0,1.5) ${mouseXpercentage}%, rgba(175,0,0,1.5) 100%)`;
+      }
+    }
+  };
 
   return (
     <Container>
@@ -53,17 +58,7 @@ export default function UserAverageSessions() {
         <LineChart
           data={data}
           strokeWidth={1}
-          onMouseMove={(e) => {
-            if (e.isTooltipActive === true) {
-              // Gestion du fond de couleur lors du survol
-              let div = document.querySelector('.bUPtxZ');
-              let windowWidth = div.clientWidth;
-              let mouseXpercentage = Math.round(
-                (e.activeCoordinate.x / windowWidth) * 100
-              );
-              div.style.background = `linear-gradient(90deg, rgba(255,0,0,1) ${mouseXpercentage}%, rgba(175,0,0,1.5) ${mouseXpercentage}%, rgba(175,0,0,1.5) 100%)`;
-            }
-          }}
+          onMouseMove={handleMouseMove}
         >
           <XAxis
             type="category"

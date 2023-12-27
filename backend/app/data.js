@@ -17,11 +17,11 @@ const USER_MAIN_DATA = [
     {
         id: 18,
         userInfos: {
-            firstName: 'Djoulie',
+            firstName: 'Ju',
             lastName: 'Dav',
-            age: 34,
+            age: 29,
         },
-        score: 0.3,
+        todayScore: 0.3,
         keyData: {
             calorieCount: 2500,
             proteinCount: 90,

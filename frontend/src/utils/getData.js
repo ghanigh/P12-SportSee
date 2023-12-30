@@ -5,7 +5,7 @@ import { getUserActivityMockedData, getUserAverageSessionsMockedData, getUserInf
  * Récupère les données en fonction du type et de l'identifiant.
  * @param {string} type - Type de données à récupérer (ex: "USER_ACTIVITY").
  * @param {number} id - Identifiant de l'utilisateur.
- * @returns {Array} - Tableau contenant les données récupérées.
+ * @returns {Array} - Tableau contenant les donnees récupérées.
  */
 export const getData = async (type, id) => {
   try {
@@ -34,6 +34,6 @@ export const getData = async (type, id) => {
     }
    catch (error) {
     console.error(`Erreur lors de la récupération des données de type ${type} pour l'utilisateur ${id}:`, error);
-    return null; // Vous pouvez retourner une valeur par défaut ou null en cas d'erreur
+    return null; // On peux retourner une valeur par défaut ou null en cas d'erreur
   }
 };

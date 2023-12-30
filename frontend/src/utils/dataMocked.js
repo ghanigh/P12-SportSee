@@ -1,4 +1,6 @@
+// Exemple de nouveau chemin après le déplacement
 import mockedData from '../mock/dataMocked';
+
 
 /**
  * Récupère les informations sur l'utilisateur.

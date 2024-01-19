@@ -20,9 +20,14 @@ export default function User() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const request = await getData(process.env.CONNECT_API, id);
-      if (!request) return alert("Erreur de données");
-      setData(request.data);
+      try {
+        const request = await getData(process.env.CONNECT_API, id);
+        if (!request) throw new Error("Erreur de données");
+        setData(request.data);
+      } catch (error) {
+        console.error("Erreur lors de la récupération des données:", error);
+        // Gérer l'erreur de manière appropriée
+      }
     };
     fetchData();
   }, [id]);
@@ -40,12 +45,12 @@ export default function User() {
       {/* Conteneur principal */}
       <Container>
         {/* Informations utilisateur et titre de bienvenue */}
-        <UserInfos name={userInfos?.firstName} />
+        <UserInfos name={`${userInfos.firstName} ${userInfos.lastName}`} />
 
         {/* Contenu principal du tableau de bord */}
         <Content>
           <section>
-            {/* Graphiques à barres représentant l'activité quotidienne de l'utilisateurs */}
+            {/* Graphiques à barres représentant l'activité quotidienne de l'utilisateur */}
             <BarCharts />
 
             {/* Section inférieure du tableau de bord contenant plusieurs graphiques */}
@@ -66,28 +71,28 @@ export default function User() {
             {/* Informations clés sur les calories */}
             <KeyData
               icon={caloriesIcon}
-              info={`${keyData?.calorieCount}kCal`}
+              info={`${keyData.calorieCount}kCal`}
               text="Calories"
             />
 
             {/* Informations clés sur les protéines */}
             <KeyData
               icon={proteinsIcon}
-              info={`${keyData?.proteinCount}g`}
+              info={`${keyData.proteinCount}g`}
               text="Protéines"
             />
 
             {/* Informations clés sur les glucides */}
             <KeyData
               icon={glucidesIcon}
-              info={`${keyData?.carbohydrateCount}g`}
+              info={`${keyData.carbohydrateCount}g`}
               text="Glucides"
             />
 
             {/* Informations clés sur les lipides */}
             <KeyData
               icon={lipidesIcon}
-              info={`${keyData?.lipidCount}g`}
+              info={`${keyData.lipidCount}g`}
               text="Lipides"
             />
           </aside>

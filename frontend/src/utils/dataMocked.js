@@ -1,5 +1,8 @@
 // Exemple de nouveau chemin après le déplacement
-import mockedData from '../mock/dataMocked';
+import USER_ACTIVITY from '../mock/dataMocked';
+import USER_AVERAGE_SESSIONS from '../mock/dataMocked';
+import USER_MAIN_DATA from '../mock/dataMocked';
+import USER_PERFORMANCE from '../mock/dataMocked';
 
 
 /**
@@ -11,7 +14,7 @@ import mockedData from '../mock/dataMocked';
 export function getUserInfosMockedData(id) {
   try {
     // Recherche de l'utilisateur dans USER_MAIN_DATA
-    const user = mockedData.USER_MAIN_DATA.find((el) => el.id === id);
+    const user = USER_MAIN_DATA.find((el) => el.id === id);
     return { data: user };
   } catch (e) {
     // Gestion des erreurs
@@ -28,7 +31,7 @@ export function getUserInfosMockedData(id) {
 export function getUserActivityMockedData(id) {
   try {
     // Recherche de l'activité de l'utilisateur dans USER_ACTIVITY
-    const activity = mockedData.USER_ACTIVITY.find((el) => el.userId === id);
+    const activity = USER_ACTIVITY.find((el) => el.userId === id);
     return { data: activity };
   } catch (e) {
     // Gestion des erreurs
@@ -45,7 +48,7 @@ export function getUserActivityMockedData(id) {
 export function getUserAverageSessionsMockedData(id) {
   try {
     // Recherche des sessions moyennes de l'utilisateur dans USER_AVERAGE_SESSIONS
-    const averageSessions = mockedData.USER_AVERAGE_SESSIONS.find((el) => el.userId === id);
+    const averageSessions = USER_AVERAGE_SESSIONS.find((el) => el.userId === id);
     return { data: averageSessions };
   } catch (e) {
     // Gestion des erreurs
@@ -62,7 +65,7 @@ export function getUserAverageSessionsMockedData(id) {
 export function getUserPerformanceMockedData(id) {
   try {
     // Recherche des performances de l'utilisateur dans USER_PERFORMANCE
-    const performance = mockedData.USER_PERFORMANCE.find((el) => el.userId === id);
+    const performance = USER_PERFORMANCE.find((el) => el.userId === id);
     return { data: performance };
   } catch (e) {
     // Gestion des erreurs

@@ -2,6 +2,7 @@ const mockedData = {};
 
 export default mockedData;
 
+
 // Données simulées pour USER_MAIN_DATA
 const USER_MAIN_DATA = [
   {
@@ -24,7 +25,7 @@ const USER_MAIN_DATA = [
     userInfos: {
       firstName: 'Ju',
       lastName: 'Dav',
-      age: 34,
+      age: 29,
     },
     score: 0.3,
     keyData: {
@@ -99,3 +100,10 @@ const USER_PERFORMANCE = [
     ]
   }
 ];
+
+export {
+  USER_MAIN_DATA,
+  USER_ACTIVITY,
+  USER_AVERAGE_SESSIONS,
+  USER_PERFORMANCE,
+};
